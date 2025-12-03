@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginResponse {
-    private int userId;
+    private Long userId;
     private String firstName;
     private String lastName;
     private String email;

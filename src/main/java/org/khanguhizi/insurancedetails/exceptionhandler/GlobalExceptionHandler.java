@@ -11,10 +11,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DuplicateCredentialsException.class)
     public ResponseEntity<String> handleDuplicateCredentialsException(DuplicateCredentialsException duplicateCredentialsException) {
         ApiResponse apiResponse = ApiResponse.builder()
-                .status(String.valueOf(HttpStatus.BAD_REQUEST))
+                .status(String.valueOf(HttpStatus.CONFLICT))
                 .message(duplicateCredentialsException.getMessage())
                 .build();
-        return new ResponseEntity<>(apiResponse.toString(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(apiResponse.toString(), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(NoRecordsFoundException.class)
@@ -25,5 +25,15 @@ public class GlobalExceptionHandler {
                 .build();
         return new ResponseEntity<>(apiResponse.toString(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<String> handleInvalidCredentialsException(InvalidCredentialsException invalidCredentialsException) {
+        ApiResponse apiResponse = ApiResponse.builder()
+                .status(String.valueOf(HttpStatus.UNAUTHORIZED))
+                .message(invalidCredentialsException.getMessage())
+                .build();
+        return new ResponseEntity<>(apiResponse.toString(), HttpStatus.UNAUTHORIZED);
+    }
+
 
 }
